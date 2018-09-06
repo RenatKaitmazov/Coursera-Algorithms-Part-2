@@ -1,4 +1,4 @@
-package week1;
+package week1.graph;
 
 /**
  * Defines an API common to all types of graphs.

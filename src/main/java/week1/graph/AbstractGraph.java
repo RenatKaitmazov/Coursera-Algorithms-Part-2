@@ -1,4 +1,4 @@
-package week1;
+package week1.graph;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;

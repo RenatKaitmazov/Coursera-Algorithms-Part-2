@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import week1.graph.Graph;
+import week1.graph.UndirectedGraph;
 
 import static org.junit.Assert.*;
 
@@ -44,6 +46,61 @@ public class UndirectedGraphTest {
         assertEquals(expectedGraphRepresentation(), graphFromFile.toString());
         assertEquals(13, graphFromFile.vertices());
         assertEquals(13, graphFromFile.edges());
+    }
+
+    @Test
+    public void inDegreesTest() {
+        assertEquals(4, graph.inDegree(0));
+        assertEquals(2, graph.inDegree(12));
+    }
+
+    @Test
+    public void outDegreesTest() {
+        assertEquals(4, graph.outDegree(0));
+        assertEquals(2, graph.outDegree(12));
+    }
+
+    @Test
+    public void emptyGraphRepresentationTest() {
+        assertEquals("[]", new UndirectedGraph(100).toString());
+    }
+
+    @Test
+    public void onlyConnectedVerticesAreDisplayedTest() {
+        final Graph simpleGraph = new UndirectedGraph(100);
+        simpleGraph.addEdge(0, 1);
+        simpleGraph.addEdge(0, 2);
+        assertEquals("0 - [1, 2]\n1 - [0]\n2 - [0]", simpleGraph.toString());
+    }
+
+    @Test
+    public void doNotAddSelfLoops() {
+        assertFalse(graph.addEdge(0, 0));
+    }
+
+    @Test
+    public void doAddParallelEdges() {
+        assertFalse(graph.addEdge(0, 6));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void doNotAllowToCreateGraphWithZeroAmountOfVertices() {
+        new UndirectedGraph(0);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void doAllowToCreateGraphWithNegativeAmountOfVertices() {
+        new UndirectedGraph(-1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void doNotAddNegativeVertices() {
+        graph.addEdge(0, -1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void doNotAddVerticesThatDoesNotExist() {
+        graph.addEdge(99, 100);
     }
 
     private String expectedGraphRepresentation() {

@@ -1,5 +1,8 @@
 package week1;
 
+import week1.graph.Graph;
+import week1.graph.UndirectedGraph;
+
 /**
  * @author Renat Kaitmazov
  */
