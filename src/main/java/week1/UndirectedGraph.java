@@ -31,7 +31,7 @@ public final class UndirectedGraph extends AbstractGraph {
     }
 
     @Override
-    public boolean add(int fromVertex, int toVertex) {
+    protected boolean add(int fromVertex, int toVertex) {
         if (fromVertex == toVertex) {
             // Self loops are not allowed.
             return false;

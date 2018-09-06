@@ -18,7 +18,7 @@ public final class GraphProvider {
     /*--------------------------------------------------------*/
 
     public static Graph newUndirectedWith10VerticesAnd3Components() {
-        final Graph undirected = new UndirectedGraph(10);
+        final Graph undirected = new UndirectedGraph(13);
         undirected.addEdge(0, 1);
         undirected.addEdge(0, 2);
         undirected.addEdge(0, 5);

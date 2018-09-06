@@ -34,17 +34,17 @@ public abstract class AbstractGraph implements Graph {
      * where an index of array corresponds to a vertex and the entry at the index is a collection
      * of the vertices adjacent to the vertex.
      */
-    protected final Set<Integer>[] graph;
+    private final Set<Integer>[] graph;
 
     /**
      * Number of vertices in the graph.
      */
-    protected final int vertexCount;
+    private final int vertexCount;
 
     /**
      * Number of edges in the graph.
      */
-    protected int edgeCount;
+    private int edgeCount;
 
     /*--------------------------------------------------------*/
     /* Constructors                                           */
@@ -115,7 +115,7 @@ public abstract class AbstractGraph implements Graph {
             if (adjacentVertices.isEmpty()) {
                 continue;
             }
-            builder.append(vertex).append("-").append("[");
+            builder.append(vertex).append(" - ").append("[");
             for (final Integer adjacentVertex : adjacentVertices) {
                 builder.append(adjacentVertex).append(", ");
             }
@@ -171,7 +171,7 @@ public abstract class AbstractGraph implements Graph {
     /*--------------------------------------------------------*/
 
     /**
-     * Implementation left to a subclass.
+     * Implementation left to subclasses.
      * The subclass must just add a vertex and nothing more!
      *
      * @param fromVertex start point of an edge.
