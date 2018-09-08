@@ -3,7 +3,7 @@ package week1.search;
 import week1.graph.Graph;
 
 /**
- * Performs the depth first search (hence the name DFS) on the given graph.
+ * Performs the depth first search (hence the name DfsSearch) on the given graph.
  *
  * @author Renat Kaitmazov
  */
