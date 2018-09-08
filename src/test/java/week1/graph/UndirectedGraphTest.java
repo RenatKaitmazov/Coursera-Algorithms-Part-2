@@ -1,13 +1,13 @@
-package week1;
+package week1.graph;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import week1.graph.Graph;
-import week1.graph.UndirectedGraph;
+import week1.GraphProvider;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 /**
  * @author Renat Kaitmazov
@@ -74,32 +74,32 @@ public class UndirectedGraphTest {
     }
 
     @Test
-    public void doNotAddSelfLoops() {
+    public void doNotAddSelfLoopsTest() {
         assertFalse(graph.addEdge(0, 0));
     }
 
     @Test
-    public void doAddParallelEdges() {
+    public void doAddParallelEdgesTest() {
         assertFalse(graph.addEdge(0, 6));
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void doNotAllowToCreateGraphWithZeroAmountOfVertices() {
+    public void doNotAllowToCreateGraphWithZeroAmountOfVerticesTest() {
         new UndirectedGraph(0);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void doAllowToCreateGraphWithNegativeAmountOfVertices() {
+    public void doAllowToCreateGraphWithNegativeAmountOfVerticesTest() {
         new UndirectedGraph(-1);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void doNotAddNegativeVertices() {
+    public void doNotAddNegativeVerticesTest() {
         graph.addEdge(0, -1);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void doNotAddVerticesThatDoesNotExist() {
+    public void doNotAddVerticesThatDoesNotExistTest() {
         graph.addEdge(99, 100);
     }
 
