@@ -2,6 +2,8 @@ package week1.path;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 import week1.graph.Graph;
 import week1.graph.UndirectedGraph;
 
@@ -13,6 +15,7 @@ import static org.junit.Assert.*;
  * @author Renat Kaitmazov
  */
 
+@RunWith(JUnit4.class)
 public class BfsPathTest {
 
     private AbstractGraphPath path;
