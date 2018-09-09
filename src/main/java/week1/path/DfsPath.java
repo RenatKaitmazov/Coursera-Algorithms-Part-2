@@ -2,8 +2,6 @@ package week1.path;
 
 import week1.graph.Graph;
 
-import java.util.LinkedList;
-
 /**
  * Performs the depth first search (hence the name DfsPath) to find a path from
  * the source vertex passed to the constructor and any other vertex in a graph.
@@ -35,18 +33,5 @@ public final class DfsPath extends AbstractGraphPath {
                 search(graph, neighbour);
             }
         }
-    }
-
-    @Override
-    public Iterable<Integer> pathTo(int vertex) {
-        if (!hasPathTo(vertex)) {
-            return null;
-        }
-        final LinkedList<Integer> path = new LinkedList<>();
-        for (int v = vertex; v != sourceVertex; v = route[v]) {
-            path.addFirst(v);
-        }
-        path.addFirst(sourceVertex);
-        return path;
     }
 }

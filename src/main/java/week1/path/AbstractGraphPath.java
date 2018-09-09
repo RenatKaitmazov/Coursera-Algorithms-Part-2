@@ -2,6 +2,8 @@ package week1.path;
 
 import week1.graph.Graph;
 
+import java.util.LinkedList;
+
 /**
  * Defines an API to work with paths in graphs.
  *
@@ -15,7 +17,7 @@ public abstract class AbstractGraphPath {
     /*--------------------------------------------------------*/
 
     private final int vertexCount;
-    protected final int sourceVertex;
+    private final int sourceVertex;
 
     /**
      * Keeps track of what vertex is visited so that we won't process the same vertex more than one time.
@@ -50,7 +52,17 @@ public abstract class AbstractGraphPath {
         return visitedVertices[vertex];
     }
 
-    public abstract Iterable<Integer> pathTo(int vertex);
+    public Iterable<Integer> pathTo(int vertex) {
+        if (!hasPathTo(vertex)) {
+            return null;
+        }
+        final LinkedList<Integer> path = new LinkedList<>();
+        for (int v = vertex; v != sourceVertex; v = route[v]) {
+            path.addFirst(v);
+        }
+        path.addFirst(sourceVertex);
+        return path;
+    }
 
     /*--------------------------------------------------------*/
     /* Abstract methods                                       */
