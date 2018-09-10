@@ -166,6 +166,14 @@ public abstract class AbstractGraph implements Graph {
         return success;
     }
 
+    @Override
+    public boolean hasEdge(int fromVertex, int toVertex) {
+        checkVertexRange(fromVertex);
+        checkVertexRange(toVertex);
+        final Set<Integer> adjacentVertices = adjacentInternal(fromVertex);
+        return adjacentVertices.contains(toVertex);
+    }
+
     /*--------------------------------------------------------*/
     /* Abstract methods                                       */
     /*--------------------------------------------------------*/

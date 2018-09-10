@@ -6,8 +6,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import week1.GraphProvider;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 /**
  * @author Renat Kaitmazov
@@ -101,6 +100,16 @@ public class UndirectedGraphTest {
     @Test(expected = IllegalArgumentException.class)
     public void doNotAddVerticesThatDoesNotExistTest() {
         graph.addEdge(99, 100);
+    }
+
+    @Test
+    public void checkHasEdgeTest() {
+        assertTrue(graph.hasEdge(0, 1));
+    }
+
+    @Test
+    public void checkEdgeIsAbsent() {
+        assertFalse(graph.hasEdge(0, 3));
     }
 
     private String expectedGraphRepresentation() {

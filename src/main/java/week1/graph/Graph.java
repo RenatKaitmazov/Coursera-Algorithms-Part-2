@@ -55,4 +55,13 @@ public interface Graph {
      * @return number of outgoing edges.
      */
     int outDegree(int ofVertex);
+
+    /**
+     * Checks to see if there is an edge between the given two vertices.
+     *
+     * @param fromVertex the start of the edge.
+     * @param toVertex the end of the edge.
+     * @return <code>true</code> if there is an edge between the start and end vertices, <code>false</code> otherwise.
+     */
+    boolean hasEdge(int fromVertex, int toVertex);
 }
