@@ -19,7 +19,7 @@ public class UndirectedGraphTest {
 
     @Before
     public void setUp() {
-        graph = GraphProvider.newUndirectedWith10VerticesAnd3Components();
+        graph = GraphProvider.newUndirectedWith13VerticesAnd3Components();
     }
 
     @Test
@@ -40,7 +40,7 @@ public class UndirectedGraphTest {
 
     @Test
     public void processExistentFileTest() {
-        final String filePath = "src/test/java/week1/tiny_graph.txt";
+        final String filePath = "src/test/java/week1/tiny_undirected_graph.txt";
         final Graph graphFromFile = new UndirectedGraph(filePath);
         assertEquals(expectedGraphRepresentation(), graphFromFile.toString());
         assertEquals(13, graphFromFile.vertices());
@@ -78,7 +78,7 @@ public class UndirectedGraphTest {
     }
 
     @Test
-    public void doAddParallelEdgesTest() {
+    public void doNotAddParallelEdgesTest() {
         assertFalse(graph.addEdge(0, 6));
     }
 

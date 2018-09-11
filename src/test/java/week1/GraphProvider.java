@@ -1,5 +1,6 @@
 package week1;
 
+import week1.graph.DirectedGraph;
 import week1.graph.Graph;
 import week1.graph.UndirectedGraph;
 
@@ -20,7 +21,7 @@ public final class GraphProvider {
     /* API                                                    */
     /*--------------------------------------------------------*/
 
-    public static Graph newUndirectedWith10VerticesAnd3Components() {
+    public static Graph newUndirectedWith13VerticesAnd3Components() {
         final Graph undirected = new UndirectedGraph(13);
         undirected.addEdge(0, 1);
         undirected.addEdge(0, 2);
@@ -39,5 +40,44 @@ public final class GraphProvider {
         undirected.addEdge(11, 12);
 
         return undirected;
+    }
+
+    public static DirectedGraph provideDirectedWith13Vertices() {
+        final DirectedGraph directed = new DirectedGraph(13);
+        directed.addEdge(0, 1);
+        directed.addEdge(0, 5);
+
+        directed.addEdge(2, 0);
+        directed.addEdge(2, 3);
+
+        directed.addEdge(3, 2);
+        directed.addEdge(3, 5);
+
+        directed.addEdge(4, 2);
+        directed.addEdge(4, 3);
+
+        directed.addEdge(5, 4);
+
+        directed.addEdge(6, 0);
+        directed.addEdge(6, 4);
+        directed.addEdge(6, 9);
+
+        directed.addEdge(7, 6);
+        directed.addEdge(7, 8);
+
+        directed.addEdge(8, 7);
+        directed.addEdge(8, 9);
+
+        directed.addEdge(9, 10);
+        directed.addEdge(9, 11);
+
+        directed.addEdge(10, 12);
+
+        directed.addEdge(11, 4);
+        directed.addEdge(11, 12);
+
+        directed.addEdge(12, 9);
+
+        return directed;
     }
 }

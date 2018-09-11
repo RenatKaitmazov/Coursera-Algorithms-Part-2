@@ -21,7 +21,7 @@ public class UndirectedCycleTest {
 
     @Before
     public void setUp() {
-        final UndirectedGraph graph1 = (UndirectedGraph) GraphProvider.newUndirectedWith10VerticesAnd3Components();
+        final UndirectedGraph graph1 = (UndirectedGraph) GraphProvider.newUndirectedWith13VerticesAnd3Components();
         cycle1 = new UndirectedCycle(graph1);
 
         final UndirectedGraph graph2 = new UndirectedGraph(5);

@@ -84,6 +84,7 @@ public abstract class AbstractGraph implements Graph {
             vertexCount = vertices;
             graph = (Set<Integer>[]) new LinkedHashSet[vertexCount];
             initGraph();
+            onVertexCountExtractedFromFile(vertexCount);
             final int edges = Integer.parseInt(input.readLine());
             for (int i = 0; i < edges; ++i) {
                 final String line = input.readLine();
@@ -159,6 +160,11 @@ public abstract class AbstractGraph implements Graph {
     public boolean addEdge(int fromVertex, int toVertex) {
         checkVertexRange(fromVertex);
         checkVertexRange(toVertex);
+        if (fromVertex == toVertex
+                || adjacentInternal(fromVertex).contains(toVertex)) {
+            // Self loops or parallel edges are not allowed.
+            return false;
+        }
         final boolean success = add(fromVertex, toVertex);
         if (success) {
             ++edgeCount;
@@ -183,7 +189,7 @@ public abstract class AbstractGraph implements Graph {
      * The subclass must just add a vertex and nothing more!
      *
      * @param fromVertex start point of an edge.
-     * @param toVertex end point of the edge.
+     * @param toVertex   end point of the edge.
      * @return <code>true</code> if the edge was successfully added, <code>false</code> otherwise.
      */
     protected abstract boolean add(int fromVertex, int toVertex);
@@ -198,7 +204,7 @@ public abstract class AbstractGraph implements Graph {
         }
     }
 
-    private void checkVertexRange(int vertex) {
+    protected void checkVertexRange(int vertex) {
         if (vertex < 0 || vertex >= vertexCount) {
             throw new IllegalArgumentException("The graph does not have vertex: " + vertex);
         }
@@ -212,5 +218,11 @@ public abstract class AbstractGraph implements Graph {
 
     protected Set<Integer> adjacentInternal(int vertex) {
         return graph[vertex];
+    }
+
+    // A hook methods which is called in a constructor that takes a path to file when the amount
+    // of vertices is read from the file.
+    // Gives subclasses a change to perform initialization before the addEdge method is called.
+    protected void onVertexCountExtractedFromFile(int vertexCount) {
     }
 }

@@ -30,7 +30,7 @@ public class BipartiteTest {
         graph.addEdge(2, 3);
         bipartite = new Bipartite(graph);
 
-        nonBipartite = new Bipartite(GraphProvider.newUndirectedWith10VerticesAnd3Components());
+        nonBipartite = new Bipartite(GraphProvider.newUndirectedWith13VerticesAnd3Components());
     }
 
     @Test

@@ -21,7 +21,7 @@ public class ConnectedComponentsTest {
 
     @Before
     public void setUp() {
-        final Graph graph = GraphProvider.newUndirectedWith10VerticesAnd3Components();
+        final Graph graph = GraphProvider.newUndirectedWith13VerticesAnd3Components();
         components = new ConnectedComponents((UndirectedGraph) graph);
     }
 

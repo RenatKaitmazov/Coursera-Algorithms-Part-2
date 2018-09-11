@@ -21,7 +21,7 @@ public class DfsSearchTest {
 
     @Before
     public void setUp() {
-        graph = GraphProvider.newUndirectedWith10VerticesAnd3Components();
+        graph = GraphProvider.newUndirectedWith13VerticesAnd3Components();
         search = new DfsSearch(graph, 0);
     }
 

@@ -32,15 +32,7 @@ public final class UndirectedGraph extends AbstractGraph {
 
     @Override
     protected boolean add(int fromVertex, int toVertex) {
-        if (fromVertex == toVertex) {
-            // Self loops are not allowed.
-            return false;
-        }
         final Set<Integer> sourceAdjacentVertices = adjacentInternal(fromVertex);
-        if (sourceAdjacentVertices.contains(toVertex)) {
-            // Already added. Parallel edges are not allowed, so we are done.
-            return false;
-        }
         final Set<Integer> destinationAdjacentVertices = adjacentInternal(toVertex);
         return sourceAdjacentVertices.add(toVertex)
                 && destinationAdjacentVertices.add(fromVertex);
