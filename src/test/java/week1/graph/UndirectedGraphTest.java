@@ -108,7 +108,7 @@ public class UndirectedGraphTest {
     }
 
     @Test
-    public void checkEdgeIsAbsent() {
+    public void checkEdgeIsAbsentTest() {
         assertFalse(graph.hasEdge(0, 3));
     }
 

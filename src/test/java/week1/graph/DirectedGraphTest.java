@@ -72,8 +72,19 @@ public class DirectedGraphTest {
     }
 
     @Test
-    public void checkEdgeIsAbsent() {
+    public void checkEdgeIsAbsentTest() {
         assertFalse(graph.hasEdge(0, 3));
+    }
+
+    @Test
+    public void checkReverseTest() {
+        final DirectedGraph directedGraph = new DirectedGraph(5);
+        directedGraph.addEdge(0, 4);
+        directedGraph.addEdge(1, 4);
+        directedGraph.addEdge(2, 4);
+        directedGraph.addEdge(3, 4);
+        final DirectedGraph reversed = directedGraph.reverse();
+        assertEquals("4 - [0, 1, 2, 3]", reversed.toString());
     }
 
     private String expectedGraphRepresentation() {
