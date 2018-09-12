@@ -14,20 +14,20 @@ import static org.junit.Assert.*;
  */
 
 @RunWith(JUnit4.class)
-public class DfsSearchTest {
+public class UndirectedBfsSearchTest {
 
     private Graph graph;
-    private AbstractGraphSearch search;
+    private AbstractUndirectedGraphSearch search;
 
     @Before
     public void setUp() {
         graph = GraphProvider.newUndirectedWith13VerticesAnd3Components();
-        search = new DfsSearch(graph, 0);
+        search = new UndirectedBfsSearch(graph, 0);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void doesNotAllowNegativeSourceVertexTest() {
-        new DfsSearch(graph, -1);
+        new UndirectedDfsSearch(graph, -1);
     }
 
     @Test

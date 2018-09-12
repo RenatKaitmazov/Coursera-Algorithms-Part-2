@@ -220,7 +220,7 @@ public abstract class AbstractGraph implements Graph {
         return graph[vertex];
     }
 
-    // A hook methods which is called in a constructor that takes a path to file when the amount
+    // A hook method which is called in a constructor, that takes a path to file, when the amount
     // of vertices is read from the file.
     // Gives subclasses a change to perform initialization before the addEdge method is called.
     protected void onVertexCountExtractedFromFile(int vertexCount) {

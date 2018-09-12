@@ -9,7 +9,7 @@ import week1.graph.Graph;
  * @author Renat Kaitmazov
  */
 
-public abstract class AbstractGraphSearch {
+public abstract class AbstractUndirectedGraphSearch {
 
     /*--------------------------------------------------------*/
     /* Fields                                                 */
@@ -31,7 +31,7 @@ public abstract class AbstractGraphSearch {
     /* Constructors                                           */
     /*--------------------------------------------------------*/
 
-    public AbstractGraphSearch(Graph graph, int sourceVertex) {
+    public AbstractUndirectedGraphSearch(Graph graph, int sourceVertex) {
         vertexCount = graph.vertices();
         checkVertexRange(sourceVertex);
         visitedVertices = new boolean[vertexCount];

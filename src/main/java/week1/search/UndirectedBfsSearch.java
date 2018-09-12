@@ -6,23 +6,23 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Performs the breadth first search (hence the name BfsSearch) on the
+ * Performs the breadth first search (hence the name UndirectedBfsSearch) on the
  *
  * @author Renat Kaitmazov
  */
 
-public final class BfsSearch extends AbstractGraphSearch {
+public final class UndirectedBfsSearch extends AbstractUndirectedGraphSearch {
 
     /*--------------------------------------------------------*/
     /* Constructors                                           */
     /*--------------------------------------------------------*/
 
-    public BfsSearch(Graph graph, int sourceVertex) {
+    public UndirectedBfsSearch(Graph graph, int sourceVertex) {
         super(graph, sourceVertex);
     }
 
     /*--------------------------------------------------------*/
-    /* AbstractGraphSearch implementation                     */
+    /* AbstractUndirectedGraphSearch implementation           */
     /*--------------------------------------------------------*/
 
     @Override

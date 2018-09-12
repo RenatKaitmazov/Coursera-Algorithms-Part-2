@@ -24,7 +24,7 @@ public final class BfsPath extends AbstractGraphPath {
     }
 
     /*--------------------------------------------------------*/
-    /* AbstractGraphSearch implementation                     */
+    /* AbstractUndirectedGraphSearch implementation                     */
     /*--------------------------------------------------------*/
 
     @Override
