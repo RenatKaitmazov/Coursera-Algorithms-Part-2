@@ -60,13 +60,15 @@ public final class Bipartite {
     private void checkIfBipartite(Graph graph, int parentVertex) {
         visitedVertices[parentVertex] = true;
         for (final int neighbour : graph.adjacentVertices(parentVertex)) {
+            if (!isBipartite) {
+                return;
+            }
             if (!visitedVertices[neighbour]) {
                 visitedVertices[parentVertex] = true;
                 // Make the neighbour's color opposite to its parent color.
                 colors[neighbour] = !colors[parentVertex];
             } else if (haveSameColor(neighbour, parentVertex)) {
                 isBipartite = false;
-                return;
             }
         }
     }
