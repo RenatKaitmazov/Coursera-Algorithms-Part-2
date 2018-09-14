@@ -42,7 +42,7 @@ public final class GraphProvider {
         return undirected;
     }
 
-    public static DirectedGraph provideDirectedWith13Vertices() {
+    public static DirectedGraph newDirectedWith13Vertices() {
         final DirectedGraph directed = new DirectedGraph(13);
         directed.addEdge(0, 1);
         directed.addEdge(0, 5);
@@ -81,7 +81,7 @@ public final class GraphProvider {
         return directed;
     }
 
-    public static DirectedGraph provideDirectedWith13VerticesAndNoCycles() {
+    public static DirectedGraph newDirectedWith13VerticesAndNoCycles() {
         final DirectedGraph graph = new DirectedGraph(13);
         graph.addEdge(0, 1);
         graph.addEdge(0, 5);

@@ -56,7 +56,7 @@ public final class ConnectedComponents {
      * @return <code>true</code> if they are connected, <code>false</code> otherwise.
      */
     public boolean isConnected(int fromVertex, int toVertex) {
-        return vertexId(fromVertex) == vertexId(toVertex);
+        return componentId(fromVertex) == componentId(toVertex);
     }
 
     /**
@@ -75,7 +75,7 @@ public final class ConnectedComponents {
      * @param vertex a vertex whose id we want to know.
      * @return the id of the given vertex.
      */
-    public int vertexId(int vertex) {
+    public int componentId(int vertex) {
         checkVertexRange(vertex);
         return ids[vertex];
     }

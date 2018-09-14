@@ -2,6 +2,8 @@ package week1.misc;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 import week1.GraphProvider;
 
 import java.util.ArrayList;
@@ -14,18 +16,19 @@ import static org.junit.Assert.*;
  * @author Renat Kaitmazov
  */
 
+@RunWith(JUnit4.class)
 public class TopologicalSortTest {
 
     private TopologicalSort topologicalSort;
 
     @Before
     public void setUp() {
-        topologicalSort = new TopologicalSort(GraphProvider.provideDirectedWith13VerticesAndNoCycles());
+        topologicalSort = new TopologicalSort(GraphProvider.newDirectedWith13VerticesAndNoCycles());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void doesNotProcessGraphWithCyclesTest() {
-        new TopologicalSort(GraphProvider.provideDirectedWith13Vertices());
+        new TopologicalSort(GraphProvider.newDirectedWith13Vertices());
     }
 
     @Test

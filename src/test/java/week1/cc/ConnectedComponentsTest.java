@@ -56,18 +56,18 @@ public class ConnectedComponentsTest {
 
     @Test
     public void checkVerticesIdsTest() {
-        assertEquals(0, components.vertexId(0));
-        assertEquals(0, components.vertexId(1));
-        assertEquals(0, components.vertexId(2));
-        assertEquals(0, components.vertexId(3));
-        assertEquals(0, components.vertexId(4));
-        assertEquals(0, components.vertexId(5));
-        assertEquals(0, components.vertexId(6));
-        assertEquals(1, components.vertexId(7));
-        assertEquals(1, components.vertexId(8));
-        assertEquals(2, components.vertexId(9));
-        assertEquals(2, components.vertexId(10));
-        assertEquals(2, components.vertexId(11));
-        assertEquals(2, components.vertexId(12));
+        assertEquals(0, components.componentId(0));
+        assertEquals(0, components.componentId(1));
+        assertEquals(0, components.componentId(2));
+        assertEquals(0, components.componentId(3));
+        assertEquals(0, components.componentId(4));
+        assertEquals(0, components.componentId(5));
+        assertEquals(0, components.componentId(6));
+        assertEquals(1, components.componentId(7));
+        assertEquals(1, components.componentId(8));
+        assertEquals(2, components.componentId(9));
+        assertEquals(2, components.componentId(10));
+        assertEquals(2, components.componentId(11));
+        assertEquals(2, components.componentId(12));
     }
 }

@@ -22,8 +22,8 @@ public class DirectedCycleTest {
 
     @Before
     public void setUp() {
-        cycle = new DirectedCycle(GraphProvider.provideDirectedWith13Vertices());
-        noCycle = new DirectedCycle(GraphProvider.provideDirectedWith13VerticesAndNoCycles());
+        cycle = new DirectedCycle(GraphProvider.newDirectedWith13Vertices());
+        noCycle = new DirectedCycle(GraphProvider.newDirectedWith13VerticesAndNoCycles());
     }
 
     @Test

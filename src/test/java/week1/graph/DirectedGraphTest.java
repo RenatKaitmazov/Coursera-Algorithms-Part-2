@@ -19,7 +19,7 @@ public class DirectedGraphTest {
 
     @Before
     public void setUp() {
-        graph = GraphProvider.provideDirectedWith13Vertices();
+        graph = GraphProvider.newDirectedWith13Vertices();
     }
 
     @Test

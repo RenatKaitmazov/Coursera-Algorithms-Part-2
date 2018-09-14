@@ -23,7 +23,7 @@ public class DirectedDfsSearchTest {
 
     @Before
     public void setUp() {
-        final DirectedGraph graph = GraphProvider.provideDirectedWith13VerticesAndNoCycles();
+        final DirectedGraph graph = GraphProvider.newDirectedWith13VerticesAndNoCycles();
         searchSingleSource = new DirectedDfsSearch(graph, 0);
         searchMultipleSource = new DirectedDfsSearch(graph, Arrays.asList(8, 1, 5));
     }
