@@ -1,10 +1,7 @@
 package week1.homework;
 
 import edu.princeton.cs.algs4.Digraph;
-import edu.princeton.cs.algs4.In;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,13 +29,14 @@ public final class SAP {
      */
     private static final byte ID_GROUP_2 = 2;
 
+    private static final int INITIAL_DISTANCE = -1;
+
     /*--------------------------------------------------------*/
     /* Fields                                                 */
     /*--------------------------------------------------------*/
 
     private final Digraph digraph;
     private final int vertexCount;
-
     /**
      * Keeps track of already visited vertices so that we can efficiently explore the graph without processing the same
      * vertex again.
@@ -46,34 +44,28 @@ public final class SAP {
      * ancestral path from one group of vertices to another group of vertices.
      */
     private final boolean[] visited;
-
     /**
      * Keeps track of the distance from the first group of vertices to the given vertex.
      */
     private final int[] distanceGroup1;
-
     /**
      * Keeps track of the distance from the second group of vertices to the given vertex.
      */
     private final int[] distanceGroup2;
-
     /**
      * Keeps track of what vertex belongs to what group.
      */
     private final byte[] groupIds;
-
     /**
      * This queue keeps track of what vertices have been changed during the computation so that we can reset the results
      * of computation. This allows us to reuse the same resources instead of creating new ones every time we do a
      * computation.
      */
     private final IntQueue indicesOfChangedVertices = new IntQueue();
-
     /**
      * Caches computations.
      */
     private final CacheEntity[] cache;
-
     private final List<Integer> from = new LinkedList<>();
     private final List<Integer> to = new LinkedList<>();
 
@@ -89,8 +81,8 @@ public final class SAP {
         distanceGroup1 = new int[vertexCount];
         distanceGroup2 = new int[vertexCount];
         for (int i = 0; i < vertexCount; ++i) {
-            distanceGroup1[i] = -1;
-            distanceGroup2[i] = -1;
+            distanceGroup1[i] = INITIAL_DISTANCE;
+            distanceGroup2[i] = INITIAL_DISTANCE;
         }
         groupIds = new byte[vertexCount];
         cache = new CacheEntity[vertexCount];
@@ -166,8 +158,8 @@ public final class SAP {
         while (!indicesOfChangedVertices.isEmpty()) {
             final int index = indicesOfChangedVertices.dequeue();
             visited[index] = false;
-            distanceGroup1[index] = -1;
-            distanceGroup2[index] = -1;
+            distanceGroup1[index] = INITIAL_DISTANCE;
+            distanceGroup2[index] = INITIAL_DISTANCE;
             groupIds[index] = 0;
         }
     }
@@ -347,29 +339,5 @@ public final class SAP {
         public String toString() {
             return String.format("(length=%d;ancestor=%d)", length, ancestor);
         }
-    }
-
-    public static void main(String[] args) {
-        final In in = new In(args[0]);
-        final int vertexCount = in.readInt();
-        final Digraph digraph = new Digraph(vertexCount);
-        final int edgeCount = in.readInt();
-        for (int i = 0; i < edgeCount; ++i) {
-            final int from = in.readInt();
-            final int to = in.readInt();
-            digraph.addEdge(from, to);
-        }
-        final SAP sap = new SAP(digraph);
-//        final Scanner scanner = new Scanner(System.in);
-//        final int fromVertex = scanner.nextInt();
-//        final int toVertex = scanner.nextInt();
-//        System.out.println(sap.length(fromVertex, toVertex));
-//        System.out.println(sap.ancestor(fromVertex, toVertex));
-        System.out.println(
-                sap.ancestor(
-                        Arrays.asList(6701, 35238),
-                        Collections.singleton(45113)
-                )
-        );
     }
 }
