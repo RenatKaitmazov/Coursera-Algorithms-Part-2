@@ -6,6 +6,8 @@ import edu.princeton.cs.algs4.In;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -72,6 +74,9 @@ public final class SAP {
      */
     private final CacheEntity[] cache;
 
+    private final List<Integer> from = new LinkedList<>();
+    private final List<Integer> to = new LinkedList<>();
+
     /*--------------------------------------------------------*/
     /* Constructors                                           */
     /*--------------------------------------------------------*/
@@ -89,6 +94,8 @@ public final class SAP {
         }
         groupIds = new byte[vertexCount];
         cache = new CacheEntity[vertexCount];
+        from.add(-1);
+        to.add(-1);
     }
 
     /*--------------------------------------------------------*/
@@ -103,7 +110,9 @@ public final class SAP {
         if (cachedData != null) {
             return cachedData.length;
         }
-        final SapTuple result = findLengthAndAncestor(fromVertex, toVertex);
+        setVertices(fromVertex, toVertex);
+        final SapTuple result = findLengthAndAncestor(from, to, false);
+        resetComputationResults();
         putIntoCache(fromVertex, toVertex, result);
         return result.length;
     }
@@ -116,19 +125,21 @@ public final class SAP {
         if (cachedData != null) {
             return cachedData.ancestor;
         }
-        final SapTuple result = findLengthAndAncestor(fromVertex, toVertex);
+        setVertices(fromVertex, toVertex);
+        final SapTuple result = findLengthAndAncestor(from, to, false);
+        resetComputationResults();
         putIntoCache(fromVertex, toVertex, result);
         return result.ancestor;
     }
 
     public int length(Iterable<Integer> fromVertices, Iterable<Integer> toVertices) {
-        final SapTuple result = findLengthAndAncestor(fromVertices, toVertices);
+        final SapTuple result = findLengthAndAncestor(fromVertices, toVertices, true);
         resetComputationResults();
         return result.length;
     }
 
     public int ancestor(Iterable<Integer> fromVertices, Iterable<Integer> toVertices) {
-        final SapTuple result = findLengthAndAncestor(fromVertices, toVertices);
+        final SapTuple result = findLengthAndAncestor(fromVertices, toVertices,true);
         resetComputationResults();
         return result.ancestor;
     }
@@ -138,12 +149,10 @@ public final class SAP {
     /*--------------------------------------------------------*/
 
     private void checkVerticesValidity(Iterable<Integer> vertices) {
-        try {
-            for (final int vertex : vertices) {
-                checkVertex(vertex);
-            }
-        } catch (NullPointerException error) {
-            throw new IllegalArgumentException("Vertex is null");
+        Utils.checkNotNull(vertices);
+        for (final Integer vertex : vertices) {
+            Utils.checkNotNull(vertex);
+            checkVertex(vertex);
         }
     }
 
@@ -181,45 +190,9 @@ public final class SAP {
         entity.put(toVertex, tuple);
     }
 
-    private SapTuple findLengthAndAncestor(int fromVertex, int toVertex) {
-        checkVertex(fromVertex);
-        checkVertex(toVertex);
-        if (fromVertex == toVertex) {
-            return new SapTuple(0, fromVertex);
-        }
-        final IntQueue queue = new IntQueue();
-        groupIds[fromVertex] = ID_GROUP_1;
-        groupIds[toVertex] = ID_GROUP_2;
-        exploreNextVertex(fromVertex, fromVertex, queue);
-        exploreNextVertex(toVertex, toVertex, queue);
-        int bestDistance = Integer.MAX_VALUE;
-        final SapTuple tuple = new SapTuple(-1, -1);
-        while (!queue.isEmpty()) {
-            final int visitedVertex = queue.dequeue();
-            for (final int neighbour : digraph.adj(visitedVertex)) {
-                if (!visited[neighbour]) {
-                    exploreNextVertex(neighbour, visitedVertex, queue);
-                } else if (isReachableFromBothVertices(neighbour, visitedVertex)) {
-                    updateDistance(neighbour, visitedVertex);
-                    final int distanceFromGroup1 = distanceGroup1[neighbour];
-                    final int distanceFromGroup2 = distanceGroup2[neighbour];
-                    if (distanceFromGroup1 > bestDistance && distanceFromGroup2 > bestDistance) {
-                        break;
-                    }
-                    final int totalDistance = distanceFromGroup1 + distanceFromGroup2;
-                    if (totalDistance < bestDistance) {
-                        bestDistance = totalDistance;
-                        tuple.length = bestDistance;
-                        tuple.ancestor = neighbour;
-                    }
-                }
-            }
-        }
-        resetComputationResults();
-        return tuple;
-    }
-
-    private SapTuple findLengthAndAncestor(Iterable<Integer> fromVertices, Iterable<Integer> toVertices) {
+    private SapTuple findLengthAndAncestor(Iterable<Integer> fromVertices,
+                                           Iterable<Integer> toVertices,
+                                           boolean hasMultipleSources) {
         checkVerticesValidity(fromVertices);
         checkVerticesValidity(toVertices);
         final IntQueue verticesQueue = new IntQueue();
@@ -272,7 +245,9 @@ public final class SAP {
                         bestDistanceSoFar = totalDistance;
                         result.length = totalDistance;
                         result.ancestor = adjacentVertex;
-                        verticesQueue.enqueue(adjacentVertex);
+                        if (hasMultipleSources) {
+                            verticesQueue.enqueue(adjacentVertex);
+                        }
                     }
                 }
             }
@@ -334,6 +309,11 @@ public final class SAP {
         }
         bfsQueue.enqueue(vertex);
         indicesOfChangedVertices.enqueue(vertex);
+    }
+
+    private void setVertices(int fromVertex, int toVertex) {
+        from.set(0, fromVertex);
+        to.set(0, toVertex);
     }
 
     /*--------------------------------------------------------*/
