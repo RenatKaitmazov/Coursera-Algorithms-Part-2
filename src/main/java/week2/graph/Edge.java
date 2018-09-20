@@ -49,8 +49,8 @@ public final class Edge implements Comparable<Edge> {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
         final Edge that = (Edge) obj;
-        return (this.fromVertex == that.fromVertex && this.toVertex == that.toVertex)
-                || (this.fromVertex == that.toVertex && this.toVertex == that.fromVertex);
+        return (this.fromVertex == that.fromVertex && this.toVertex == that.toVertex && this.weight == that.weight)
+                || (this.fromVertex == that.toVertex && this.toVertex == that.fromVertex && this.weight == that.weight);
     }
 
     @Override
@@ -58,6 +58,7 @@ public final class Edge implements Comparable<Edge> {
         int result = 3;
         result = 31 * result + fromVertex;
         result = 31 * result + toVertex;
+        result = 31 * result + Double.hashCode(weight);
         return result;
     }
 

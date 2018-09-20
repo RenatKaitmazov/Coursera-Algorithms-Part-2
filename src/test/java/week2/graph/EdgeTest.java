@@ -20,7 +20,6 @@ public class EdgeTest {
         assertEquals(0, edge1.compareTo(edge2));
         assertEquals(edge1, edge2);
         assertEquals(edge1.hashCode(), edge2.hashCode());
-        assertEquals(edge1, new Edge(2, 1, 3.0));
     }
 
     @Test
