@@ -15,13 +15,13 @@ import java.util.Queue;
  * @author Renat Kaitmazov
  */
 
-public class KruskalMst implements MinSpanningTree {
+public final class KruskalMst implements MinSpanningTree {
 
     /*--------------------------------------------------------*/
     /* Fields                                                 */
     /*--------------------------------------------------------*/
 
-    private final Queue<Edge> edges = new LinkedList<>();
+    private final Queue<Edge> mstEdges = new LinkedList<>();
     private double totalWeight;
 
     /*--------------------------------------------------------*/
@@ -32,12 +32,12 @@ public class KruskalMst implements MinSpanningTree {
         final int vertexCount = graph.vertexCount();
         final Queue<Edge> minWeightEdgeQueue = new PriorityQueue<>(graph.edgeCount());
         for (final Edge edge : graph.edges()) {
-            // Sort edges in ascending order based on their weight using a priority queue.
+            // Sort mstEdges in ascending order based on their weight using a priority queue.
             minWeightEdgeQueue.add(edge);
         }
         final UnionFind unionFind = new UnionFind();
         final int mstSize = vertexCount - 1;
-        while (!minWeightEdgeQueue.isEmpty() && edges.size() < mstSize) {
+        while (!minWeightEdgeQueue.isEmpty() && mstEdges.size() < mstSize) {
             // Remove the current min edge.
             final Edge minEdge = minWeightEdgeQueue.remove();
             // Get its start and end points.
@@ -46,7 +46,7 @@ public class KruskalMst implements MinSpanningTree {
             // If adding this edge to the current MST creates a cycle, then ignore the edge.
             if (unionFind.isConnected(start, end)) continue;
             unionFind.union(start, end);
-            edges.add(minEdge);
+            mstEdges.add(minEdge);
             totalWeight += minEdge.weight();
         }
     }
@@ -57,7 +57,7 @@ public class KruskalMst implements MinSpanningTree {
 
     @Override
     public Iterable<Edge> edges() {
-        return edges;
+        return mstEdges;
     }
 
     @Override
