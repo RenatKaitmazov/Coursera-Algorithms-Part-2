@@ -71,31 +71,6 @@ public final class LazyPrimMst implements MinSpanningTree {
     /* Helper methods                                         */
     /*--------------------------------------------------------*/
 
-    private void findMst(WeightedUndirectedGraph graph,
-                         Queue<Edge> minEdges,
-                         boolean[] verticesOnMst,
-                         int startVertex) {
-        // Start with initial vertex and then grow the MST from that vertex.
-        addAdjacentEdges(graph, minEdges, verticesOnMst, startVertex);
-        while (!minEdges.isEmpty()) {
-            // An edge that could potentially be added into the MST
-            final Edge minEdge = minEdges.remove();
-            final int vertex1 = minEdge.eitherVertex();
-            final int vertex2 = minEdge.otherVertex(vertex1);
-            // Found an edge that is already in the MST.
-            if (verticesOnMst[vertex1] && verticesOnMst[vertex2]) continue;
-            mstEdges.add(minEdge);
-            totalWeight += minEdge.weight();
-            // Explore other edges of the graph.
-            if (!verticesOnMst[vertex1]) {
-                addAdjacentEdges(graph, minEdges, verticesOnMst, vertex1);
-            }
-            if (!verticesOnMst[vertex2]) {
-                addAdjacentEdges(graph, minEdges, verticesOnMst, vertex2);
-            }
-        }
-    }
-
     private void addAdjacentEdges(WeightedUndirectedGraph graph,
                                   Queue<Edge> minEdges,
                                   boolean[] verticesOnMst,
