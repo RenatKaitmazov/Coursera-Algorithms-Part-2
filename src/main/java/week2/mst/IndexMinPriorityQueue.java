@@ -85,9 +85,8 @@ public final class IndexMinPriorityQueue<K extends Comparable<K>> {
     }
 
     public boolean contains(int index) {
-        checkNotEmpty();
         checkIndexInRange(index);
-        return binaryHeap[index] > -1;
+        return keys[index] != null;
     }
 
     public int size() {
