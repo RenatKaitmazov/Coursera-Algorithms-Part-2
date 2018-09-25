@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 /**
- * This is a lazy version of the Prim's algorithm to find the minimum spanning tree in a graph.
+ * This is a lazy version of the Prim's algorithm to find the minimum spanning tree in a weighted graph.
  *
  * @author Renat Kaitmazov
  */
