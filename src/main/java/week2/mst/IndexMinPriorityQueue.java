@@ -177,9 +177,7 @@ public final class IndexMinPriorityQueue<K extends Comparable<K>> {
     }
 
     private boolean isNotLess(int i, int j) {
-        final int iValueIndex = binaryHeap[i];
-        final int jValueIndex = binaryHeap[j];
-        return keys[iValueIndex].compareTo(keys[jValueIndex]) >= 0;
+        return !isLess(i, j);
     }
 
     private boolean isLess(int i, int j) {
