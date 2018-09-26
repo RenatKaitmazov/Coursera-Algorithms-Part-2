@@ -35,6 +35,25 @@ public final class DirectedEdge {
         return String.format("(%d->%d|%.6f)", from, to, weight);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null || obj.getClass() != this.getClass()) return false;
+        final DirectedEdge that = (DirectedEdge) obj;
+        return this.from == that.from
+                && this.to == that.to
+                && this.weight == that.weight;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 3;
+        result = 31 * result + from;
+        result = 31 * result + to;
+        result = 31 * result + Double.hashCode(weight);
+        return result;
+    }
+
     /*--------------------------------------------------------*/
     /* Getters                                                */
     /*--------------------------------------------------------*/
