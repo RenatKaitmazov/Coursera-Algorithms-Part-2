@@ -116,7 +116,7 @@ public class WeightedDirectedGraphTest {
         builder.append("4 - [(4->5|0.350000), (4->7|0.370000)]\n");
         builder.append("5 - [(5->4|0.350000), (5->7|0.280000), (5->1|0.320000)]\n");
         builder.append("6 - [(6->2|0.400000), (6->0|0.580000), (6->4|0.930000)]\n");
-        builder.append("7 - [(7->5|0.280000), (7->3|0.390000)]");
+        builder.append("7 - [(7->5|0.280000), (7->3|0.370000)]");
         return builder.toString();
     }
 
@@ -130,7 +130,7 @@ public class WeightedDirectedGraphTest {
         edges.add(new DirectedEdge(5, 1, 0.32));
         edges.add(new DirectedEdge(0, 4, 0.38));
         edges.add(new DirectedEdge(0, 2, 0.26));
-        edges.add(new DirectedEdge(7, 3, 0.39));
+        edges.add(new DirectedEdge(7, 3, 0.37));
         edges.add(new DirectedEdge(1, 3, 0.29));
         edges.add(new DirectedEdge(2, 7, 0.34));
         edges.add(new DirectedEdge(6, 2, 0.40));

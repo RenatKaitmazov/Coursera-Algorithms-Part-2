@@ -41,6 +41,7 @@ public final class DijkstraShortestPath implements ShortestPath {
         for (int vertex = 0; vertex < vertexCount; ++vertex) {
             cost[vertex] = Double.POSITIVE_INFINITY;
         }
+        cost[sourceVertex] = 0.0;
         edgeTo = new DirectedEdge[vertexCount];
         final IndexMinPriorityQueue<Double> minQueue = new IndexMinPriorityQueue<>(vertexCount);
         final double sourceDistance = 0.0;

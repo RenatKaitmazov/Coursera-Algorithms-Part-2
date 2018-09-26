@@ -53,7 +53,7 @@ public final class WeightedGraphProvider {
         graph.addEdge(new DirectedEdge(5, 1, 0.32));
         graph.addEdge(new DirectedEdge(0, 4, 0.38));
         graph.addEdge(new DirectedEdge(0, 2, 0.26));
-        graph.addEdge(new DirectedEdge(7, 3, 0.39));
+        graph.addEdge(new DirectedEdge(7, 3, 0.37));
         graph.addEdge(new DirectedEdge(1, 3, 0.29));
         graph.addEdge(new DirectedEdge(2, 7, 0.34));
         graph.addEdge(new DirectedEdge(6, 2, 0.40));
