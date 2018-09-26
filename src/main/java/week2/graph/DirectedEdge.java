@@ -1,4 +1,4 @@
-package week2.path;
+package week2.graph;
 
 /**
  * Represents an edge in a directed weighted graph.
@@ -32,7 +32,7 @@ public final class DirectedEdge {
 
     @Override
     public String toString() {
-        return String.format("(%d->%d|%.4f)", from, to, weight);
+        return String.format("(%d->%d|%.6f)", from, to, weight);
     }
 
     /*--------------------------------------------------------*/
