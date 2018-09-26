@@ -27,4 +27,21 @@ public class DirectedEdgeTest {
         assertEquals(3, edge.to());
         assertEquals(0.23194, edge.weight(), 0.0);
     }
+
+    @Test
+    public void equalityTest() {
+        final DirectedEdge lhs = new DirectedEdge(1, 4, 0.34751);
+        final DirectedEdge rhs = new DirectedEdge(1, 4, 0.34751);
+        assertEquals(lhs, lhs);
+        assertEquals(lhs, rhs);
+        assertEquals(lhs.hashCode(), rhs.hashCode());
+    }
+
+    @Test
+    public void inequalityTest() {
+        final DirectedEdge lhs = new DirectedEdge(4, 1, 0.3242);
+        final DirectedEdge rhs = new DirectedEdge(1, 4, 0.3242);
+        assertNotEquals(lhs, null);
+        assertNotEquals(lhs, rhs);
+    }
 }
