@@ -20,7 +20,7 @@ import java.util.StringTokenizer;
  * @author Renat Kaitmazov
  */
 
-public final class WeightedUndirectedGraph implements WeightedGraph {
+public final class WeightedUndirectedGraph {
 
     /*--------------------------------------------------------*/
     /* Constants                                              */
@@ -136,43 +136,36 @@ public final class WeightedUndirectedGraph implements WeightedGraph {
     }
 
     /*--------------------------------------------------------*/
-    /* WeightedGraph implementation                           */
+    /* API                                                    */
     /*--------------------------------------------------------*/
 
-    @Override
     public int vertexCount() {
         return vertexCount;
     }
 
-    @Override
     public int edgeCount() {
         return edges.size();
     }
 
-    @Override
     public Iterable<Edge> edges() {
         return edges;
     }
 
-    @Override
     public int outDegree(int ofVertex) {
         checkVertexRange(ofVertex);
         return graph[ofVertex].size();
     }
 
-    @Override
     public int inDegree(int ofVertex) {
         // In an undirected graph the number of out degrees is equal to the number of in degrees.
         return outDegree(ofVertex);
     }
 
-    @Override
     public Iterable<Edge> adjacentEdges(int ofVertex) {
         checkVertexRange(ofVertex);
         return graph[ofVertex];
     }
 
-    @Override
     public boolean addEdge(Edge edge) {
         final int vertex1 = edge.eitherVertex();
         final int vertex2 = edge.otherVertex(vertex1);
