@@ -82,7 +82,8 @@ public class DijkstraShortestPathTest {
         );
     }
 
-    private <T> Iterable<T> linkedListOf(T... values) {
+    @SafeVarargs
+    private final <T> Iterable<T> linkedListOf(T... values) {
         final LinkedList<T> items = new LinkedList<>();
         Collections.addAll(items, values);
         return items;

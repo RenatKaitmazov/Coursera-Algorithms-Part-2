@@ -2,17 +2,18 @@ package week2.path;
 
 import week2.graph.DirectedEdge;
 import week2.graph.WeightedDirectedGraph;
-import week2.mst.IndexMinPriorityQueue;
 
 import java.util.LinkedList;
+import java.util.Queue;
 
 /**
- * Edgar Dijkstra's algorithm to find the shortest path.
+ * Computes the shortest path in a weighted directed acyclic graph.
+ * This algorithm is based on topological sort and is faster than {@link DijkstraShortestPath}.
  *
  * @author Renat Kaitmazov
  */
 
-public final class DijkstraShortestPath implements ShortestPath {
+public final class DagShortestPath implements ShortestPath {
 
     /*--------------------------------------------------------*/
     /* Fields                                                 */
@@ -33,8 +34,7 @@ public final class DijkstraShortestPath implements ShortestPath {
     /* Constructors                                           */
     /*--------------------------------------------------------*/
 
-    public DijkstraShortestPath(WeightedDirectedGraph graph, int sourceVertex) {
-        // Perform set up.
+    public DagShortestPath(WeightedDirectedGraph graph, int sourceVertex) {
         vertexCount = graph.vertexCount();
         checkVertexRange(sourceVertex);
         cost = new double[vertexCount];
@@ -43,13 +43,9 @@ public final class DijkstraShortestPath implements ShortestPath {
         }
         cost[sourceVertex] = 0.0;
         edgeTo = new DirectedEdge[vertexCount];
-        final IndexMinPriorityQueue<Double> minQueue = new IndexMinPriorityQueue<>(vertexCount);
-        final double sourceDistance = 0.0;
-        minQueue.insert(sourceVertex, sourceDistance);
-        while (!minQueue.isEmpty()) {
-            // A visited vertex which is on the shortest path.
-            final int visitedVertex = minQueue.delete();
-            relax(graph, minQueue, visitedVertex);
+        final Topological topological = new Topological(graph, sourceVertex);
+        for (final int vertex : topological.preOrder()) {
+            relax(graph, vertex);
         }
     }
 
@@ -88,30 +84,63 @@ public final class DijkstraShortestPath implements ShortestPath {
         }
     }
 
-    // The relaxation is basically the process of updating the cost and the edge connecting the source vertex
-    // with its neighbour vertex if we found a better way to go from the source to the neighbour.
-    private void relax(WeightedDirectedGraph graph,
-                       IndexMinPriorityQueue<Double> minQueue,
-                       int sourceVertex) {
-        for (final DirectedEdge edge : graph.adjacentEdges(sourceVertex)) {
-            // The start point of the edge.
-            final int fromVertex = edge.from();
-            // The endpoint of the edge.
+    private void relax(WeightedDirectedGraph graph, int vertex) {
+        for (final DirectedEdge edge : graph.adjacentEdges(vertex)) {
             final int toVertex = edge.to();
-            // The cost of reaching the endpoint from other path (if there is such a path).
             final double oldCost = cost[toVertex];
-            // The cost of reaching the endpoint from the current path.
-            final double newCost = cost[fromVertex] + edge.weight();
+            final double newCost = cost[vertex] + edge.weight();
             if (newCost < oldCost) {
-                // It is cheaper to get to the endpoint using the current path, so update the data.
                 cost[toVertex] = newCost;
                 edgeTo[toVertex] = edge;
-                if (minQueue.contains(toVertex)) {
-                    minQueue.decreaseKey(toVertex, newCost);
-                } else {
-                    // This means that this is the only path from source to the endpoint and there is no any other paths
-                    // to get here.
-                    minQueue.insert(toVertex, newCost);
+            }
+        }
+    }
+
+    /*--------------------------------------------------------*/
+    /* Nested classes                                         */
+    /*--------------------------------------------------------*/
+
+    private static final class Topological {
+
+        /*--------------------------------------------------------*/
+        /* Fields                                                 */
+        /*--------------------------------------------------------*/
+
+        private final Queue<Integer> preOrder = new LinkedList<>();
+
+        /*--------------------------------------------------------*/
+        /* Constructors                                           */
+        /*--------------------------------------------------------*/
+
+        Topological(WeightedDirectedGraph graph, int source) {
+            final int vertexCount = graph.vertexCount();
+            final boolean[] visitedVertices = new boolean[vertexCount];
+            for (int vertex = source; vertex < vertexCount; ++vertex) {
+                if (!visitedVertices[vertex]) {
+                    sort(graph, vertex, visitedVertices);
+                }
+            }
+        }
+
+        /*--------------------------------------------------------*/
+        /* API                                                    */
+        /*--------------------------------------------------------*/
+
+        public Iterable<Integer> preOrder() {
+            return preOrder;
+        }
+
+        /*--------------------------------------------------------*/
+        /* Helper methods                                         */
+        /*--------------------------------------------------------*/
+
+        private void sort(WeightedDirectedGraph graph, int vertex, boolean[] visitedVertices) {
+            visitedVertices[vertex] = true;
+            preOrder.add(vertex);
+            for (final DirectedEdge edge : graph.adjacentEdges(vertex)) {
+                final int toVertex = edge.to();
+                if (!visitedVertices[toVertex]) {
+                    sort(graph, toVertex, visitedVertices);
                 }
             }
         }

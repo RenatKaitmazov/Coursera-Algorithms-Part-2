@@ -62,4 +62,8 @@ public final class WeightedGraphProvider {
         graph.addEdge(new DirectedEdge(6, 4, 0.93));
         return graph;
     }
+
+    public static WeightedDirectedGraph newDagWith8verticesAnd13Edges() {
+        return new WeightedDirectedGraph("src/test/java/week2/tiny_acyclic_weighted.txt");
+    }
 }
