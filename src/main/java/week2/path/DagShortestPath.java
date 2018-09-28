@@ -4,7 +4,6 @@ import week2.graph.DirectedEdge;
 import week2.graph.WeightedDirectedGraph;
 
 import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * Computes the shortest path in a weighted directed acyclic graph.
@@ -43,8 +42,8 @@ public final class DagShortestPath implements ShortestPath {
         }
         cost[sourceVertex] = 0.0;
         edgeTo = new DirectedEdge[vertexCount];
-        final Topological topological = new Topological(graph, sourceVertex);
-        for (final int vertex : topological.preOrder()) {
+        final PreOrderSort sort = new PreOrderSort(graph, sourceVertex);
+        for (final int vertex : sort.preOrder()) {
             relax(graph, vertex);
         }
     }
@@ -92,56 +91,6 @@ public final class DagShortestPath implements ShortestPath {
             if (newCost < oldCost) {
                 cost[toVertex] = newCost;
                 edgeTo[toVertex] = edge;
-            }
-        }
-    }
-
-    /*--------------------------------------------------------*/
-    /* Nested classes                                         */
-    /*--------------------------------------------------------*/
-
-    private static final class Topological {
-
-        /*--------------------------------------------------------*/
-        /* Fields                                                 */
-        /*--------------------------------------------------------*/
-
-        private final Queue<Integer> preOrder = new LinkedList<>();
-
-        /*--------------------------------------------------------*/
-        /* Constructors                                           */
-        /*--------------------------------------------------------*/
-
-        Topological(WeightedDirectedGraph graph, int source) {
-            final int vertexCount = graph.vertexCount();
-            final boolean[] visitedVertices = new boolean[vertexCount];
-            for (int vertex = source; vertex < vertexCount; ++vertex) {
-                if (!visitedVertices[vertex]) {
-                    sort(graph, vertex, visitedVertices);
-                }
-            }
-        }
-
-        /*--------------------------------------------------------*/
-        /* API                                                    */
-        /*--------------------------------------------------------*/
-
-        public Iterable<Integer> preOrder() {
-            return preOrder;
-        }
-
-        /*--------------------------------------------------------*/
-        /* Helper methods                                         */
-        /*--------------------------------------------------------*/
-
-        private void sort(WeightedDirectedGraph graph, int vertex, boolean[] visitedVertices) {
-            visitedVertices[vertex] = true;
-            preOrder.add(vertex);
-            for (final DirectedEdge edge : graph.adjacentEdges(vertex)) {
-                final int toVertex = edge.to();
-                if (!visitedVertices[toVertex]) {
-                    sort(graph, toVertex, visitedVertices);
-                }
             }
         }
     }
