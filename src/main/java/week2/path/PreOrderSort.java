@@ -22,10 +22,10 @@ public final class PreOrderSort {
     /* Constructors                                           */
     /*--------------------------------------------------------*/
 
-    public PreOrderSort(WeightedDirectedGraph graph, int source) {
+    public PreOrderSort(WeightedDirectedGraph graph, int sourceVertex) {
         final int vertexCount = graph.vertexCount();
         final boolean[] visitedVertices = new boolean[vertexCount];
-        for (int vertex = source; vertex < vertexCount; ++vertex) {
+        for (int vertex = sourceVertex; vertex < vertexCount; ++vertex) {
             if (!visitedVertices[vertex]) {
                 sort(graph, vertex, visitedVertices);
             }
