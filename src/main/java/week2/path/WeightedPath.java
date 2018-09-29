@@ -3,13 +3,13 @@ package week2.path;
 import week2.graph.DirectedEdge;
 
 /**
- * Defines a common API for algorithms that find the shortest path in a weighted directed graph
+ * Defines a common API for algorithms that compute a path (be it shortest or longest) in a weighted directed graph
  * from some source vertex S to every other vertex in the graph.
  *
  * @author Renat Kaitmazov
  */
 
-public interface ShortestPath {
+public interface WeightedPath {
 
     /**
      * Checks to see if there is a path from the source vertex to the given vertex.

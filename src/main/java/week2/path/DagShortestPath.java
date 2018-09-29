@@ -12,7 +12,7 @@ import java.util.LinkedList;
  * @author Renat Kaitmazov
  */
 
-public final class DagShortestPath implements ShortestPath {
+public final class DagShortestPath implements WeightedPath {
 
     /*--------------------------------------------------------*/
     /* Fields                                                 */
@@ -49,7 +49,7 @@ public final class DagShortestPath implements ShortestPath {
     }
 
     /*--------------------------------------------------------*/
-    /* ShortestPath implementation                            */
+    /* WeightedPath implementation                            */
     /*--------------------------------------------------------*/
 
     @Override

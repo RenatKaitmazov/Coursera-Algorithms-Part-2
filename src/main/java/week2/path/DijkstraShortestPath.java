@@ -12,7 +12,7 @@ import java.util.LinkedList;
  * @author Renat Kaitmazov
  */
 
-public final class DijkstraShortestPath implements ShortestPath {
+public final class DijkstraShortestPath implements WeightedPath {
 
     /*--------------------------------------------------------*/
     /* Fields                                                 */
@@ -54,7 +54,7 @@ public final class DijkstraShortestPath implements ShortestPath {
     }
 
     /*--------------------------------------------------------*/
-    /* ShortestPath implementation                            */
+    /* WeightedPath implementation                            */
     /*--------------------------------------------------------*/
 
     @Override

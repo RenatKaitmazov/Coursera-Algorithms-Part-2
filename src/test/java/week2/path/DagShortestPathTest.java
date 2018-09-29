@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 @RunWith(JUnit4.class)
 public class DagShortestPathTest {
 
-    private final ShortestPath sp = new DagShortestPath(WeightedGraphProvider.newDagWith8verticesAnd13Edges(), 5);
+    private final WeightedPath sp = new DagShortestPath(WeightedGraphProvider.newDagWith8verticesAnd13Edges(), 5);
 
     @Test
     public void hasPathTest() {

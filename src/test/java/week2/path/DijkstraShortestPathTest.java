@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(JUnit4.class)
 public class DijkstraShortestPathTest {
 
-    private ShortestPath sp;
+    private WeightedPath sp;
 
     @Before
     public void setUp() {
