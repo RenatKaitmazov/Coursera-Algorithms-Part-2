@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 @RunWith(JUnit4.class)
 public class PreOrderSortTest {
 
-    private final PreOrderSort sort = new PreOrderSort(WeightedGraphProvider.newDagWith8verticesAnd13Edges(), 5);
+    private final ReversedPostOrderSort sort = new ReversedPostOrderSort(WeightedGraphProvider.newDagWith8verticesAnd13Edges(), 5);
 
     @Test
     public void preOrderTest() {

@@ -51,6 +51,10 @@ public class DagLongestPathTest {
     @Test
     public void pathTest() {
         assertEquals(
+                listOf(),
+                lp.path(5)
+        );
+        assertEquals(
                 listOf(new DirectedEdge(5, 1, 0.32)),
                 lp.path(1)
         );

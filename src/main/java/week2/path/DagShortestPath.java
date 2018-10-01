@@ -42,7 +42,7 @@ public final class DagShortestPath implements WeightedPath {
         }
         cost[sourceVertex] = 0.0;
         edgeTo = new DirectedEdge[vertexCount];
-        final PreOrderSort sort = new PreOrderSort(graph, sourceVertex);
+        final ReversedPostOrderSort sort = new ReversedPostOrderSort(graph, sourceVertex);
         for (final int vertex : sort.preOrder()) {
             relax(graph, vertex);
         }

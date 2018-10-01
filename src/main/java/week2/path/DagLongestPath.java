@@ -3,6 +3,8 @@ package week2.path;
 import week2.graph.DirectedEdge;
 import week2.graph.WeightedDirectedGraph;
 
+import java.util.LinkedList;
+
 /**
  * This algorithm computes the longest path in a DAG.
  *
@@ -39,6 +41,10 @@ public final class DagLongestPath implements WeightedPath {
         }
         cost[sourceVertex] = 0.0;
         edgeTo = new DirectedEdge[vertexCount];
+        final ReversedPostOrderSort sort = new ReversedPostOrderSort(graph, sourceVertex);
+        for (final int vertex : sort.preOrder()) {
+            relax(graph, vertex);
+        }
     }
 
     /*--------------------------------------------------------*/
@@ -52,7 +58,12 @@ public final class DagLongestPath implements WeightedPath {
 
     @Override
     public Iterable<DirectedEdge> path(int toVertex) {
-        return null;
+        if (!hasPath(toVertex)) return null;
+        final LinkedList<DirectedEdge> path = new LinkedList<>();
+        for (DirectedEdge edge = edgeTo[toVertex]; edge != null; edge = edgeTo[edge.from()]) {
+            path.addFirst(edge);
+        }
+        return path;
     }
 
     @Override
@@ -72,6 +83,15 @@ public final class DagLongestPath implements WeightedPath {
     }
 
     private void relax(WeightedDirectedGraph graph, int vertex) {
-
+        for (final DirectedEdge edge : graph.adjacentEdges(vertex)) {
+            final int fromVertex = edge.from();
+            final int toVertex = edge.to();
+            final double oldCost = cost[toVertex];
+            final double newCost = cost[fromVertex] + edge.weight();
+            if (newCost > oldCost) {
+                cost[toVertex] = newCost;
+                edgeTo[toVertex] = edge;
+            }
+        }
     }
 }

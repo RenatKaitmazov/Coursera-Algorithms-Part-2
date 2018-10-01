@@ -48,6 +48,10 @@ public class DagShortestPathTest {
     @Test
     public void pathTest() {
         assertEquals(
+                createPath(),
+                sp.path(5)
+        );
+        assertEquals(
                 createPath(new DirectedEdge(5, 1, 0.32)),
                 sp.path(1)
         );
