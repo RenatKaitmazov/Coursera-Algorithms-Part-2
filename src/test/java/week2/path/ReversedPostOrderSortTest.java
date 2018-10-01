@@ -16,13 +16,13 @@ import static org.junit.Assert.*;
  */
 
 @RunWith(JUnit4.class)
-public class PreOrderSortTest {
+public class ReversedPostOrderSortTest {
 
     private final ReversedPostOrderSort sort = new ReversedPostOrderSort(WeightedGraphProvider.newDagWith8verticesAnd13Edges(), 5);
 
     @Test
     public void preOrderTest() {
-        assertEquals(queueOf(5, 4, 7, 2, 0, 1, 3, 6), sort.preOrder());
+        assertEquals(queueOf(5, 1, 3, 6, 4, 0, 7, 2), sort.preOrder());
     }
 
     @SafeVarargs
