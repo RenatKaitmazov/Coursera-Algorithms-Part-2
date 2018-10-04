@@ -94,6 +94,51 @@ public final class SeamCarver {
         return path;
     }
 
+    public void removeHorizontalSeam(int[] seam) {
+        // TODO 3) Add implementation
+        checkNotNull(seam);
+    }
+
+    public void removeVerticalSeam(int[] seam) {
+        // TODO 4) Add implementation
+        checkNotNull(seam);
+    }
+
+    /*--------------------------------------------------------*/
+    /* Helper methods                                         */
+    /*--------------------------------------------------------*/
+
+    private <T> void checkNotNull(T item) {
+        if (item == null) {
+            throw new IllegalArgumentException("Item is null");
+        }
+    }
+
+    private void checkPointInRange(int x, int y) {
+        if ((x < 0 || x >= width()) || (y < 0 || y >= height())) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private int delta(int lhsRgb, int rhsRgb) {
+        final int deltaR = red(rhsRgb) - red(lhsRgb);
+        final int deltaG = green(rhsRgb) - green(lhsRgb);
+        final int deltaB = blue(rhsRgb) - blue(lhsRgb);
+        return (deltaR * deltaR) + (deltaG * deltaG) + (deltaB * deltaB);
+    }
+
+    private int red(int rgb) {
+        return (rgb >> 16) & 0x000000FF;
+    }
+
+    private int green(int rgb) {
+        return (rgb >> 8) & 0x000000FF;
+    }
+
+    private int blue(int rgb) {
+        return rgb & 0x000000FF;
+    }
+
     private void findShortestVerticalPathFromOrigin(int[] path,
                                                     double[] cost,
                                                     final int rows,
@@ -152,6 +197,11 @@ public final class SeamCarver {
                         oldPath[i] = path[i];
                         oldCost[i] = cost[i];
                     }
+                    // Update cost.
+                    final double delta = oldCost[row] - (oldCost[row - 1] + minEnergy);
+                    for (int i = row; i < rows; ++i) {
+                        oldCost[i] -= delta;
+                    }
                 }
                 return;
             } else {
@@ -169,61 +219,10 @@ public final class SeamCarver {
         }
     }
 
-    public void removeHorizontalSeam(int[] seam) {
-        // TODO 3) Add implementation
-        checkNotNull(seam);
-    }
-
-    public void removeVerticalSeam(int[] seam) {
-        // TODO 4) Add implementation
-        checkNotNull(seam);
-    }
-
-    /*--------------------------------------------------------*/
-    /* Helper methods                                         */
-    /*--------------------------------------------------------*/
-
-    private <T> void checkNotNull(T item) {
-        if (item == null) {
-            throw new IllegalArgumentException("Item is null");
-        }
-    }
-
-    private void checkPointInRange(int x, int y) {
-        if ((x < 0 || x >= width()) || (y < 0 || y >= height())) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private int delta(int lhsRgb, int rhsRgb) {
-        final int deltaR = red(rhsRgb) - red(lhsRgb);
-        final int deltaG = green(rhsRgb) - green(lhsRgb);
-        final int deltaB = blue(rhsRgb) - blue(lhsRgb);
-        return (deltaR * deltaR) + (deltaG * deltaG) + (deltaB * deltaB);
-    }
-
-    private int red(int rgb) {
-        return (rgb >> 16) & 0x000000FF;
-    }
-
-    private int green(int rgb) {
-        return (rgb >> 8) & 0x000000FF;
-    }
-
-    private int blue(int rgb) {
-        return rgb & 0x000000FF;
-    }
-
     public static void main(String[] args) {
-        final String path = "/Users/RenatKaitmazov/Desktop/seam/10x12.png";
+        final String path = "/Users/RenatKaitmazov/Desktop/seam/7x10.png";
         final Picture picture = new Picture(path);
         final SeamCarver carver = new SeamCarver(picture);
-        for (int row = 0; row < carver.height(); ++row) {
-            for (int col = 0; col < carver.width(); ++col) {
-                System.out.printf("%.2f\t", carver.energy(col, row));
-            }
-            System.out.println();
-        }
         System.out.println();
         System.out.println(Arrays.toString(carver.findVerticalSeam()));
     }
